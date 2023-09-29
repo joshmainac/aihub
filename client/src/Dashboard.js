@@ -11,17 +11,17 @@ function Dashboard() {
         <div className="app-container">
             <GameCard
                 title="Word Search Classic"
-                imageUrl={logo192} // Use the imported image
+            // imageUrl={logo192} // Use the imported image
 
             />
             <GameCard
                 title="Word Search Classic"
-                imageUrl={logo192} // Use the imported image
+            // imageUrl={logo192} // Use the imported image
 
             />
             <GameCard
                 title="Word Search Classic"
-                imageUrl={logo192} // Use the imported image
+            // imageUrl={logo192} // Use the imported image
 
             />
             {/* Add more GameCard components as needed */}
