@@ -1,2 +1,7 @@
 #install 
 #npm install react-router-dom@5
+#Netlify
+#bese directory:client/
+#Build command: npm run build
+#Publish directory:client/build
+#Functions directory:default

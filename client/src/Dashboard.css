@@ -1,0 +1,14 @@
+/* Dashboard.css */
+
+.app-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 100px;
+    /* Space between game cards */
+    background-color: #f4f4f4;
+    /* Light gray background for the dashboard */
+    min-height: 100vh;
+    /* Full viewport height */
+}
