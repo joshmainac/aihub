@@ -18,11 +18,11 @@ jobs:
       with:
         node-version: '18.x' # or any specific version you need
 
-    - name: Navigate to client folder
-      run: cd client
+
 
     - name: Install dependencies
-      run: npm ci
+      run: cd client && npm ci
+
 
     - name: Run tests
       run: npm test
