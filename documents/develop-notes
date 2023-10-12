@@ -5,3 +5,9 @@
 #Build command: npm run build
 #Publish directory:client/build
 #Functions directory:default
+
+#testing
+#npm install mocha
+#make folder next to src(in the same folder as json)
+#make test base on my example
+#test:mocha (change package.json script)
