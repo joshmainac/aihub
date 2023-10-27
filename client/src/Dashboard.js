@@ -2,52 +2,60 @@ import React from "react";
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import GameCard from './GameCard';
 import logo192 from './logo192.png'; // Import the image
+import generated from './generated.png'; // Import the image
+
 // import logo512 from './logo512.png'; // Import the image
 import './Dashboard.css';
 
 
 function Dashboard() {
     return (
-        <div className="app-container">
+        <div className="app-container" style={{ backgroundImage: `url(${generated})` }}>
+
             <GameCard
-                title="Word Search Classic"
+                title="Chat GPT"
                 imageUrl={logo192} // Use the imported image
+                linkUrl="https://chat.openai.com"
 
             />
             <GameCard
-                title="Word Search Classic"
-            // imageUrl={logo192} // Use the imported image
+                title="Deepfakes Web"
+                // imageUrl={logo192} // Use the imported image
+                linkUrl="https://deepfakesweb.com/"
+
 
             />
             <GameCard
-                title="Word Search Classic"
-            // imageUrl={logo192} // Use the imported image
+                title="Stable Diffusion Online"
+                // imageUrl={logo192} // Use the imported image
+                linkUrl="https://stablediffusionweb.com/"
+
 
             />
             <GameCard
-                title="Word Search Classic"
-            // imageUrl={logo192} // Use the imported image
-
+                title="Notion"
+                // imageUrl={logo192} // Use the imported image
+                linkUrl="https://www.notion.so/"
             />
             <GameCard
-                title="Word Search Classic"
-            // imageUrl={logo192} // Use the imported image
-
+                title="Jasper"
+                // imageUrl={logo192} // Use the imported image
+                linkUrl="https://www.jasper.ai/"
             />
             <GameCard
-                title="Word Search Classic"
-            // imageUrl={logo192} // Use the imported image
-
+                title="Midjourney"
+                // imageUrl={logo192} // Use the imported image
+                linkUrl="https://www.midjourney.com/"
             />
             <GameCard
-                title="Word Search Classic"
-            // imageUrl={logo192} // Use the imported image
-
+                title="Synthesia"
+                // imageUrl={logo192} // Use the imported image
+                linkUrl="https://www.synthesia.io/"
             />
             <GameCard
-                title="Word Search Classic"
-            // imageUrl={logo192} // Use the imported image
-
+                title="Beautiful.AI"
+                // imageUrl={logo192} // Use the imported image
+                linkUrl="https://www.beautiful.ai/"
             />
             {/* Add more GameCard components as needed */}
         </div>

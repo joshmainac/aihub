@@ -4,28 +4,15 @@ import Home from './Home';
 import Login from './Login';
 import Admin from './Admin';
 import Dashboard from './Dashboard';
+import Navbar from './Navbar';
+
 
 function App() {
   return (
     <Router>
       <div>
-        {/* Navigation links */}
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/admin">Admin</Link>
-            </li>
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
-            </li>
-          </ul>
-        </nav>
+
+        <Navbar />
 
         {/* Routes */}
         <Switch>

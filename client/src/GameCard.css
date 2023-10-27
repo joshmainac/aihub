@@ -4,6 +4,11 @@
     width: 200px;
     height: 300px;
     perspective: 1000px;
+
+    opacity: 0.7;
+    /* 1 is fully opaque, 0 is fully transparent */
+
+
 }
 
 .game-inner {
@@ -50,15 +55,31 @@
 }
 
 .play-button {
-    padding: 5px 15px;
+    padding: 10px 20px;
+    /* Increase padding for a bigger button */
+    font-size: 18px;
+    /* Increase font size to match the larger button */
     background-color: #007BFF;
     color: #FFFFFF;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    /* Slightly increased border radius for a more rounded appearance */
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Add a subtle shadow for depth */
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    /* Added transform to the transition for a "press" effect */
 }
 
 .play-button:hover {
     background-color: #0056b3;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    /* A slightly larger shadow on hover for emphasis */
+}
+
+.play-button:active {
+    transform: scale(0.96);
+    /* Creates a "press" effect when the button is clicked */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* A smaller shadow for the press effect */
 }

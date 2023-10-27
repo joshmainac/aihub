@@ -1,0 +1,39 @@
+/* Reset the default margin and padding */
+body,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+
+}
+
+.navbar ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style-type: none;
+    background-color: rgba(203, 133, 133, 0.6);
+    /* semi-transparent black background */
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* subtle shadow for depth */
+}
+
+.nav-item {
+    padding: 10px 20px;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: white;
+    /* white text for visibility */
+    font-weight: bold;
+    transition: background-color 0.3s;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.nav-item a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* subtle white background on hover */
+}

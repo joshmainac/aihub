@@ -2,16 +2,19 @@
 import React from 'react';
 import './GameCard.css';
 
-function GameCard({ title, imageUrl }) {
+function GameCard({ title, imageUrl, linkUrl }) {  // Add linkUrl as a prop
     return (
         <div className="game-card">
             <div className="game-inner">
                 <div className="game-front">
-                    <img src={imageUrl} alt={title} className="game-image" />
+                    <h2>{title}</h2>
                 </div>
                 <div className="game-back">
-                    <h2>{title}</h2>
-                    <button className="play-button">Play</button>
+                    <a href={linkUrl} target="_blank" rel="noopener noreferrer"> {/* Use linkUrl prop here */}
+                        <button className="play-button">Play</button>
+                    </a>
+                    {/* Uncomment this if you want to display the image */}
+                    {/* <img src={imageUrl} alt={title} className="game-image" /> */}
                 </div>
             </div>
         </div>

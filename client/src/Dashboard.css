@@ -11,4 +11,16 @@
     /* Light gray background for the dashboard */
     min-height: 100vh;
     /* Full viewport height */
+
+
+    background-position: center;
+    /* center the image in the div */
+    background-repeat: no-repeat;
+    /* do not repeat the image */
+    background-size: cover;
+    /* make the image cover the entire div */
+    min-height: 100vh;
+    /* this ensures the container will be at least as tall as the viewport */
+    /* Optional: Set a background color that will be visible when the image is unavailable */
+    background-color: #f3f4f6;
 }
