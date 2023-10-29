@@ -14,3 +14,20 @@
 
 #testing
 #__test__ folder in src
+
+#selenium
+#npm install selenium-webdriver
+#npm install chromedriver
+#npm install mocha --save-dev
+#npm install chai --save-dev
+#    "test3": "mocha"
+
+#upload backend for node
+#npm install express body-parser
+#npm install multer
+#npm install @google-cloud/storage
+
+
+
+
+

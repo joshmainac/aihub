@@ -5,6 +5,7 @@ import Login from './Login';
 import Admin from './Admin';
 import Dashboard from './Dashboard';
 import Navbar from './Navbar';
+import MediaUploader from './MediaUploader';
 
 
 function App() {
@@ -16,6 +17,9 @@ function App() {
 
         {/* Routes */}
         <Switch>
+          <Route path="/mediaUploader">
+            <MediaUploader />
+          </Route>
           <Route path="/dashboard">
             <Dashboard />
           </Route>

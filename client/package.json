@@ -6,11 +6,12 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "mocha": "^10.2.0",
+    "chromedriver": "^118.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
     "react-scripts": "5.0.1",
+    "selenium-webdriver": "^4.14.0",
     "web-vitals": "^2.1.4"
   },
   "babel": {
@@ -24,7 +25,8 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "react-scripts test",
-    "test2": "jest"
+    "test2": "jest",
+    "test3": "mocha"
   },
   "eslintConfig": {
     "extends": [
@@ -50,7 +52,9 @@
     "@babel/preset-env": "^7.23.2",
     "@babel/preset-react": "^7.22.15",
     "babel-jest": "^29.7.0",
+    "chai": "^4.3.10",
     "jest": "^27.5.1",
+    "mocha": "^10.2.0",
     "react-test-renderer": "^18.2.0"
   }
 }
