@@ -25,6 +25,11 @@ let tasks = [
     { id: 2, name: "Clean the house" }
 ];
 
+app.get('/', (req, res) => {
+    res.send('Welcome to our API!');
+});
+
+
 // Routes
 app.get('/tasks', (req, res) => {
     console.log(req.body);

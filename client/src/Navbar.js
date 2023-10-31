@@ -18,6 +18,9 @@ const Navbar = () => {
                 <li className="nav-item">
                     <Link to="/dashboard">Dashboard</Link>
                 </li>
+                <li className="nav-item">
+                    <Link to="/mediaUploader">mediaUploader</Link>
+                </li>
             </ul>
         </nav>
     );

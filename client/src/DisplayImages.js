@@ -9,7 +9,7 @@ function DisplayImages() {
     useEffect(() => {
         async function fetchImages() {
             try {
-                const response = await axios.get('http://localhost:8000/display');
+                const response = await axios.get('https://aihub-node-rest-api.onrender.com//display');
                 setImages(response.data);
             } catch (error) {
                 console.error('Error fetching images:', error);
