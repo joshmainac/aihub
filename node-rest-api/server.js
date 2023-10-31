@@ -2,7 +2,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const { Storage } = require('@google-cloud/storage');
+const cors = require('cors');
+require('dotenv').config();
+
+
+const { BlobServiceClient } = require('@azure/storage-blob');
 
 
 
@@ -11,6 +15,9 @@ const port = 8000;
 
 // Middleware to parse JSON requests
 app.use(bodyParser.json());
+// Use CORS middleware to handle cross-origin requests (from your React app)
+app.use(cors());
+
 
 // Sample data
 let tasks = [
@@ -54,15 +61,11 @@ app.delete('/tasks/:id', (req, res) => {
     res.status(204).send();
 });
 
-// Google Cloud Storage configuration
-const storage = new Storage({
-    keyFilename: 'mykey.json',
-    projectId: ''
-});
-
-
-//The bucket is where your files will be stored.
-const bucketName = 'your-gcs-bucket-name';
+//azure shared access signature // reset every 24 hours
+const AZURE_STORAGE_CONNECTION_STRING = process.env.AZURE_STORAGE_CONNECTION_STRING;
+const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
+const containerName = 'testcontainer';
+const containerClient = blobServiceClient.getContainerClient(containerName);
 
 //multer config (npm install multer)
 // Upload route (multer is a middleware to process file)
@@ -76,43 +79,63 @@ const upload = multer({
         fileSize: 5 * 1024 * 1024,  // Max file size: 5MB
     },
 });
-app.post('/upload', upload.single('image'), (req, res) => {
-    //console.log(req.body);
+app.post('/upload', upload.single('image'), async (req, res) => {
+    console.log("/upload triggered");
+
     if (!req.file) {
-        console.log("console.log-> /upload: No file uploaded.");
+        console.log("/upload triggered 1");
         return res.status(400).send('No file uploaded.');
     }
-    else {
-        console.log("console.log-> /upload: File uploaded.");
+    console.log("/upload triggered 2");
+
+
+    const blobName = req.file.originalname;
+    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+    console.log("/upload triggered 3");
+
+    try {
+        console.log("/upload triggered 4");
+
+        await blockBlobClient.upload(req.file.buffer, req.file.buffer.length);
+        res.status(200).send(`File uploaded to Azure Blob Storage at blob: ${blobName}`);
+    } catch (error) {
+        console.log("/upload triggered 5");
+        res.status(500).send('Error uploading to Azure Blob Storage: ' + error.message);
     }
-    //reference to a new file (or "blob") in the bucket
-    const blob = storage.bucket(bucketName).file(req.file.originalname);
-    // Create writable stream
-    const blobStream = blob.createWriteStream({
-        resumable: false,
-        gzip: true,
-
-    });
-
-    //error while writing the file 
-    blobStream.on('error', err => {
-        return res.status(500).send(err);
-    });
-
-    //Once the file upload to GCS is complete
-    blobStream.on('finish', () => {
-        const publicUrl = `https://storage.googleapis.com/${bucketName}/${blob.name}`;
-        res.status(200).send(`File uploaded to: <a href="${publicUrl}">${publicUrl}</a>`);
-    });
-
-    //This begins the process of writing the file to the GCS bucket.Since the file was 
-    //processed in memory(using multer.memoryStorage()), it's available as a buffer
-    // (req.file.buffer), which is written to the GCS blob using the created write stream.
-
-    blobStream.end(req.file.buffer)
-
-    res.status(201).json({ message: 'File uploaded successfully.' });
 });
+
+app.get('/blobs', async (req, res) => {
+    const blobs = [];
+    for await (const blob of containerClient.listBlobsFlat()) {
+        blobs.push(blob.name);
+    }
+    res.json(blobs);
+});
+
+app.get('/display2', async (req, res) => {
+    const blobs = [];
+    for await (const blob of containerClient.listBlobsFlat()) {
+        blobs.push(blob.name);
+    }
+
+    let html = '<h2>Uploaded Images</h2>';
+    for (const blobName of blobs) {
+        const blobURL = containerClient.getBlockBlobClient(blobName).url;
+        html += `<img src="${blobURL}" style="width:200px;margin:10px;" alt="${blobName}"/>`;
+    }
+    res.send(html);
+});
+
+app.get('/display', async (req, res) => {
+    const blobURLs = [];
+    for await (const blob of containerClient.listBlobsFlat()) {
+        const blobURL = containerClient.getBlockBlobClient(blob.name).url;
+        blobURLs.push(blobURL);
+    }
+    res.json(blobURLs);
+});
+
+
 
 // Start the server
 app.listen(port, () => {

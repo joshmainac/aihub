@@ -27,6 +27,10 @@
 #npm install multer
 #npm install @google-cloud/storage
 
+#setting up azure
+#const { BlobServiceClient } = require('@azure/storage-blob');
+#make a container in azure and get connection string
+
 
 
 
