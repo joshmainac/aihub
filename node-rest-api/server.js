@@ -1,4 +1,6 @@
 // server.js
+//shared access signature will expire
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require('multer');
@@ -131,22 +133,23 @@ app.get('/display2', async (req, res) => {
     res.send(html);
 });
 
+//shared access signature will expire
 app.get('/display', async (req, res) => {
     try {
-      const blobURLs = [];
-      for await (const blob of containerClient.listBlobsFlat()) {
-        const blobURL = containerClient.getBlockBlobClient(blob.name).url;
-        blobURLs.push(blobURL);
-      }
-      res.json(blobURLs);
+        const blobURLs = [];
+        for await (const blob of containerClient.listBlobsFlat()) {
+            const blobURL = containerClient.getBlockBlobClient(blob.name).url;
+            blobURLs.push(blobURL);
+        }
+        res.json(blobURLs);
     } catch (error) {
-      // Log the error for server-side inspection
-      console.error('Error retrieving blobs:', error);
-      // Send a generic error response or customize it based on the error
-      res.status(500).send('An error occurred while retrieving the data.');
+        // Log the error for server-side inspection
+        console.error('Error retrieving blobs:', error);
+        // Send a generic error response or customize it based on the error
+        res.status(500).send('An error occurred while retrieving the data.');
     }
-  });
-  
+});
+
 
 const sharp = require('sharp');
 
