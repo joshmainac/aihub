@@ -65,7 +65,7 @@ function Upload() {
             {/* <input type="file" accept=".jpg,.jpeg,.png" onChange={onFileChange} />
             <button onClick={onUpload} disabled={!file}>Upload</button>
             <div>{uploadStatus}</div> */}
-            {/* <select onChange={(e) => handleEditorSelection(e)}>
+            <select onChange={(e) => handleEditorSelection(e)}>
                 <option value="">Select Image Editor</option>
                 <option value="regularuploader">Regular Upload</option>
                 <option value="brightness">Brightness Adjuster</option>
@@ -74,15 +74,15 @@ function Upload() {
                 <option value="resize">Image Resizer</option>
                 <option value="toJPG">Convert to JPG</option>
                 <option value="toPNG">Convert to PNG</option>
-            </select> */}
+            </select>
             {/* Conditional rendering based on dropdown selection. */}
-            {/* {selectedEditor === 'regularuploader' && <RegularUploader />}
+            {selectedEditor === 'regularuploader' && <RegularUploader />}
             {selectedEditor === 'brightness' && <BrightnessAdjuster />}
             {selectedEditor === 'rotate' && <ImageRotator />}
             {selectedEditor === 'grayscale' && <GrayscaleConverter />}
             {selectedEditor === 'resize' && <ImageResizer />}
             {selectedEditor === 'toJPG' && <ImageToJPGConverter />}
-            {selectedEditor === 'toPNG' && <ImageToPNGConverter />} */}
+            {selectedEditor === 'toPNG' && <ImageToPNGConverter />}
 
 
 
