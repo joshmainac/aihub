@@ -1,0 +1,31 @@
+/* Message.css */
+.message {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    margin-right: 10px;
+}
+
+.message-content {
+    flex: 1;
+}
+
+.message-header {
+    font-weight: bold;
+}
+
+.timestamp {
+    float: right;
+    opacity: 0.8;
+}
+
+.message-text {
+    margin-top: 5px;
+}

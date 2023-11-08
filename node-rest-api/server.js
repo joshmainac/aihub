@@ -132,13 +132,190 @@ app.get('/display2', async (req, res) => {
 });
 
 app.get('/display', async (req, res) => {
-    const blobURLs = [];
-    for await (const blob of containerClient.listBlobsFlat()) {
+    try {
+      const blobURLs = [];
+      for await (const blob of containerClient.listBlobsFlat()) {
         const blobURL = containerClient.getBlockBlobClient(blob.name).url;
         blobURLs.push(blobURL);
+      }
+      res.json(blobURLs);
+    } catch (error) {
+      // Log the error for server-side inspection
+      console.error('Error retrieving blobs:', error);
+      // Send a generic error response or customize it based on the error
+      res.status(500).send('An error occurred while retrieving the data.');
     }
-    res.json(blobURLs);
+  });
+  
+
+const sharp = require('sharp');
+
+// ...
+
+// Route to adjust brightness of an image blob
+app.post('/adjustBrightness', upload.single('image'), async (req, res) => {
+    console.log("/adjustBrightness");
+
+    if (!req.file) {
+        return res.status(400).send('No file uploaded.');
+    }
+
+    const brightnessFactor = parseFloat(req.body.brightness); // Assuming brightness is sent in the request body
+
+    if (isNaN(brightnessFactor)) {
+        return res.status(400).send('Invalid brightness factor.');
+    }
+
+    try {
+        // Adjust brightness with sharp
+        const adjustedBuffer = await sharp(req.file.buffer)
+            .modulate({ brightness: brightnessFactor })
+            .toBuffer();
+
+        // Assuming you still want to upload the adjusted image to Azure Blob Storage
+        const blobName = `adjusted_${req.file.originalname}`;
+        const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+
+        await blockBlobClient.upload(adjustedBuffer, adjustedBuffer.length);
+        res.status(200).send(`Brightness adjusted and file uploaded to Azure Blob Storage at blob: ${blobName}`);
+    } catch (error) {
+        res.status(500).send('Error processing image: ' + error.message);
+    }
 });
+
+// ...
+
+// Route to rotate an image blob
+app.post('/rotateImage', upload.single('image'), async (req, res) => {
+    console.log("/rotateImage");
+
+    if (!req.file) {
+        return res.status(400).send('No file uploaded.');
+    }
+
+    const rotationAngle = parseInt(req.body.angle, 10); // Assuming the angle is sent in the request body
+
+    if (isNaN(rotationAngle)) {
+        return res.status(400).send('Invalid rotation angle.');
+    }
+
+    try {
+        // Rotate image with sharp
+        const rotatedBuffer = await sharp(req.file.buffer)
+            .rotate(rotationAngle)
+            .toBuffer();
+
+        // Assuming you still want to upload the rotated image to Azure Blob Storage
+        const blobName = `rotated_${req.file.originalname}`;
+        const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+
+        await blockBlobClient.upload(rotatedBuffer, rotatedBuffer.length);
+        res.status(200).send(`Image rotated and file uploaded to Azure Blob Storage at blob: ${blobName}`);
+    } catch (error) {
+        res.status(500).send('Error processing image: ' + error.message);
+    }
+});
+
+app.post('/toGrayscale', upload.single('image'), async (req, res) => {
+    if (!req.file) {
+        return res.status(400).send('No file uploaded.');
+    }
+
+    try {
+        // Convert to grayscale with sharp
+        const grayscaleBuffer = await sharp(req.file.buffer).grayscale().toBuffer();
+
+        // Upload to Azure Blob Storage
+        const blobName = `grayscale_${req.file.originalname}`;
+        const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+
+        await blockBlobClient.upload(grayscaleBuffer, grayscaleBuffer.length);
+        res.status(200).send(`Grayscale image uploaded to Azure Blob Storage at blob: ${blobName}`);
+    } catch (error) {
+        res.status(500).send('Error processing image: ' + error.message);
+    }
+});
+
+
+
+
+app.post('/resizeImage', upload.single('image'), async (req, res) => {
+    if (!req.file) {
+        return res.status(400).send('No file uploaded.');
+    }
+
+
+    const targetWidth = parseInt(req.body.width);
+    const targetHeight = parseInt(req.body.height);
+
+    try {
+        // Resize the image using sharp
+        const resizedBuffer = await sharp(req.file.buffer)
+            .resize(targetWidth, targetHeight)
+            .toBuffer();
+
+        // Upload to Azure Blob Storage
+        const blobName = `resized_${req.file.originalname}`;
+        const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+
+        await blockBlobClient.upload(resizedBuffer, resizedBuffer.length);
+        res.status(200).send(`Resized image uploaded to Azure Blob Storage at blob: ${blobName}`);
+    } catch (error) {
+        res.status(500).send('Error processing image: ' + error.message);
+    }
+});
+
+app.post('/convertToPNG', upload.single('image'), async (req, res) => {
+    if (!req.file) {
+        return res.status(400).send('No file uploaded.');
+    }
+
+    try {
+        // Convert the image to PNG format using sharp
+        const pngBuffer = await sharp(req.file.buffer)
+            .png()
+            .toBuffer();
+
+        // Upload to Azure Blob Storage
+        const blobName = `converted_${req.file.originalname.split('.').slice(0, -1).join('.')}.png`; // change the file extension to .png
+        const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+
+        await blockBlobClient.upload(pngBuffer, pngBuffer.length);
+        res.status(200).send(`Image converted to PNG and uploaded to Azure Blob Storage at blob: ${blobName}`);
+    } catch (error) {
+        res.status(500).send('Error processing image: ' + error.message);
+    }
+});
+
+app.post('/convertToJPG', upload.single('image'), async (req, res) => {
+    if (!req.file) {
+        return res.status(400).send('No file uploaded.');
+    }
+
+    try {
+        // Convert the image to JPG format using sharp
+        const jpgBuffer = await sharp(req.file.buffer)
+            .jpeg({ quality: 90 }) // You can adjust the quality as needed
+            .toBuffer();
+
+        // Upload to Azure Blob Storage
+        const blobName = `converted_${req.file.originalname.split('.').slice(0, -1).join('.')}.jpg`; // change the file extension to .jpg
+        const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+
+        await blockBlobClient.upload(jpgBuffer, jpgBuffer.length);
+        res.status(200).send(`Image converted to JPG and uploaded to Azure Blob Storage at blob: ${blobName}`);
+    } catch (error) {
+        res.status(500).send('Error processing image: ' + error.message);
+    }
+});
+
+
+
+
+
+
+
+
 
 
 

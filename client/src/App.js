@@ -6,36 +6,38 @@ import Admin from './Admin';
 import Dashboard from './Dashboard';
 import Navbar from './Navbar';
 import MediaUploader from './MediaUploader';
+import MessageApp from './sns/MessageApp';
 
 
 function App() {
   return (
     <Router>
-      <div>
 
-        <Navbar />
+      <Navbar />
 
-        {/* Routes */}
-        <Switch>
-          <Route path="/mediaUploader">
-            <MediaUploader />
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/admin">
-            <Admin />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+      {/* Routes */}
+      <Switch>
+        <Route path="/messageApp">
+          <MessageApp />
+        </Route>
+        <Route path="/mediaUploader">
+          <MediaUploader />
+        </Route>
+        <Route path="/dashboard">
+          <Dashboard />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/admin">
+          <Admin />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
 
 
-        </Switch>
-      </div>
+      </Switch>
     </Router>
   );
 }
