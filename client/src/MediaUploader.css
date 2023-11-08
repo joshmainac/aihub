@@ -1,27 +1,11 @@
-/* ... existing styles ... */
-
-select {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-    background-color: #f5f5f5;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-select:hover {
-    background-color: #e0e0e0;
-}
-
-/* Main Container Style */
-div {
+/* App Container Style */
+.MediaContainer div {
     padding: 20px;
     background-color: #f9f9f9;
 }
 
 /* Dropdown Styles */
-select {
+.Mediadropdown select {
     margin-top: 20px;
     padding: 10px;
     border: 1px solid #e0e0e0;
@@ -31,42 +15,4 @@ select {
     transition: background-color 0.3s;
 }
 
-/* Dropdown Hover Effect */
-select:hover {
-    background-color: #e0e0e0;
-}
-
-/* Dropdown Option Hover Effect */
-option:hover {
-    background-color: #e7e7e7;
-}
-
-/* Styles for Image Editor Components */
-.BrightnessAdjuster,
-.ImageRotator,
-.GrayscaleConverter,
-.ImageResizer,
-.ImageToJPGConverter,
-.ImageToPNGConverter,
-.RegularUploader {
-    margin-top: 30px;
-}
-
-/* Style for DisplayImages Component */
-.DisplayImages {
-    margin-top: 50px;
-}
-
-/* Future Styles for Input and Button (if uncommented) */
-input[type="file"],
-button {
-    margin-top: 10px;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #e0e0e0;
-}
+/* Add other styles from your original CSS file here, modifying them to use classes rather than element selectors */

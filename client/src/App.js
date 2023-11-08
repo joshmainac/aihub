@@ -5,8 +5,11 @@ import Login from './Login';
 import Admin from './Admin';
 import Dashboard from './Dashboard';
 import Navbar from './Navbar';
-import MediaUploader from './MediaUploader';
 import MessageApp from './sns/MessageApp';
+
+import MediaUploader from './MediaUploader';
+import './App.css';
+
 
 
 function App() {
@@ -17,12 +20,15 @@ function App() {
 
       {/* Routes */}
       <Switch>
-        <Route path="/messageApp">
-          <MessageApp />
-        </Route>
+
         <Route path="/mediaUploader">
           <MediaUploader />
         </Route>
+
+        <Route path="/messageApp">
+          <MessageApp />
+        </Route>
+
         <Route path="/dashboard">
           <Dashboard />
         </Route>
