@@ -31,7 +31,7 @@ function ImageResizer() {
         formData.append('height', height.toString());
 
         try {
-            const response = await axios.post('http://localhost:8000/resizeImage', formData, {
+            const response = await axios.post('https://aihub-node-rest-api.onrender.com/resizeImage', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

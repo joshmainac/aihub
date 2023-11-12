@@ -27,7 +27,7 @@ function ImageToPNGConverter() {
         formData.append('image', file);
 
         try {
-            const response = await axios.post('http://localhost:8000/convertToPNG', formData, {
+            const response = await axios.post('https://aihub-node-rest-api.onrender.com/convertToPNG', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

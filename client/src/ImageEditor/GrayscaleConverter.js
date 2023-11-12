@@ -27,7 +27,7 @@ function GrayscaleConverter() {
         formData.append('image', file);
 
         try {
-            const response = await axios.post('http://localhost:8000/toGrayscale', formData, {
+            const response = await axios.post('https://aihub-node-rest-api.onrender.com/toGrayscale', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

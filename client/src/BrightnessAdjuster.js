@@ -29,7 +29,7 @@ function BrightnessAdjuster() {
         formData.append('brightness', brightness.toString());
 
         try {
-            const response = await axios.post('http://localhost:8000/adjustBrightness', formData, {
+            const response = await axios.post('https://aihub-node-rest-api.onrender.com/adjustBrightness', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

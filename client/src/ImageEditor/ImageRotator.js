@@ -29,7 +29,7 @@ function ImageRotator() {
         formData.append('angle', angle.toString());
 
         try {
-            const response = await axios.post('http://localhost:8000/rotateImage', formData, {
+            const response = await axios.post('https://aihub-node-rest-api.onrender.com/rotateImage', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

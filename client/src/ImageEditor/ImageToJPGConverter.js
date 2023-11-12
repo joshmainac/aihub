@@ -27,7 +27,7 @@ function ImageToJPGConverter() {
         formData.append('image', file);
 
         try {
-            const response = await axios.post('http://localhost:8000/convertToJPG', formData, {
+            const response = await axios.post('https://aihub-node-rest-api.onrender.com/convertToJPG', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
