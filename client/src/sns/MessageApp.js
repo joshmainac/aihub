@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import MessageList from './MessageList';
 import './MessageApp.css';
+import MessageUser from './MessageUser'; // Importing the MessageUser class
+
 
 const MessageApp = () => {
     const [messages, setMessages] = useState([

@@ -21,6 +21,9 @@ const Navbar = () => {
                 <li className="nav-item">
                     <Link to="/mediaUploader">mediaUploader</Link>
                 </li>
+                <li className="nav-item">
+                    <Link to="/messageApp">messageApp</Link>
+                </li>
             </ul>
         </nav>
     );
